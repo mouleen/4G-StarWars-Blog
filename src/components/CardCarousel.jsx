@@ -1,21 +1,17 @@
-// Import necessary components from react-router-dom and other parts of the application.
-import { Link } from "react-router-dom";
-import useGlobalReducer from "../hooks/useGlobalReducer";  // Custom hook for accessing the global state.
-import Card from "../components/Card";
+import Card from "./Card"
 
-export const Demo = () => {
-  // Access the global state and dispatch function using the useGlobalReducer hook.
-  const { store, dispatch } = useGlobalReducer()
-
-  return (
-      <>
+const CardCarousel = () =>{
+  
+  return(
+    <>
         <div id="carouselid" className="carousel slide bg-black" data-bs-ride="carousel"> 
           <div className="carousel-inner py-5 mx-5 px-5">
+
             <div className="carousel-item active">
                <div className="card-wrapper mx-5 px-5 d-flex">
+
                 <Card title="a - Card title" text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit amet consectetur adipisicing elit. ssss" />
                 <Card title="b - Card title" text="Lorem ipsum dolor consectetur adipisicing elit. Sit amet." />
-
                 <div className="card border-black mx-2 bg-black rounded-4" style={{width:"18rem"}}>
                   <img src="https://lumiere-a.akamaihd.net/v1/images/plagueis-main-v1_b596bc2a.jpeg" style={{"min-height":"200px", "object-fit":"cover"}} alt="" className="card-img-top" />
                   <div className="card-body text-white">
@@ -59,6 +55,7 @@ export const Demo = () => {
             </div>
             <div className="carousel-item active">
                <div className="card-wrapper mx-5 px-5 d-flex">
+
                 <div className="card border-black mx-2 bg-black rounded-4" style={{width:"18rem"}}>
                   <img src="https://lumiere-a.akamaihd.net/v1/images/mother-aniseya-main_7ffc85e5.jpeg" style={{ "min-height":"200px", "object-fit":"cover" }} alt="" className="card-img-top" />
                   <div className="card-body text-white">
@@ -69,6 +66,7 @@ export const Demo = () => {
                   </div>
                   <div className="notch-contain"></div>
                 </div>
+                
                 <div className="card border-black mx-2 bg-black rounded-4" style={{width:"18rem"}}>
                   <img src="https://lumiere-a.akamaihd.net/v1/images/bunta-tree-main_598ecc76.jpeg"  style={{ "min-height":"200px", "object-fit":"cover"}} alt="" className="card-img-top" />
                   <div className="card-body text-white">
@@ -117,8 +115,10 @@ export const Demo = () => {
                   </div>
                   <div className="notch-contain"></div>
                 </div>
+
               </div>
             </div>
+
           </div>
            <button className="carousel-control-prev" type="button" data-bs-target="#carouselid" data-bs-slide="prev">
             <span className="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -129,10 +129,6 @@ export const Demo = () => {
             <span className="visually-hidden">Next</span>
           </button>
         </div>
-
-        <Link to="/">
-          <button className="btn btn-primary">Back home</button>
-        </Link>
       </>
-  );
-};
+)
+}
