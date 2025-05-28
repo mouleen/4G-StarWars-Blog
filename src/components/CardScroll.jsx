@@ -1,5 +1,9 @@
+import { Navigate, useNavigate } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
-const Card = ({title,text,url}) => {
+const CardScroll = ({text,type,id}) => {
+    const {store, dispatch} =useGlobalReducer()
+    const navigate=useNavigate();
     const randomImage=()=>{
         let image_array=[
             "https://lumiere-a.akamaihd.net/v1/images/bunta-tree-main_598ecc76.jpeg",
@@ -26,29 +30,17 @@ const Card = ({title,text,url}) => {
     
 return (
     <>
-        <div className="card border-black mx-2 bg-black rounded-4" style={{width:"18rem"}}>
-            <img src={randomImage()}  style={{ minHeight:"200px", objectFit:"cover"}} alt="" className="card-img-top" />
-            <div className="card-body text-white">
-                <a href={url}> 
-                    <h5 className="card-title">{title}</h5>
-                    <p className="card-text">{text}</p>
-                </a>
-            </div>
-            <div className="notch-contain"></div>
+     <div className="card border-black mx-2 bg-black rounded-4" >
+        <img src={randomImage()}   style={{ minHeight:"200px", objectFit:"cover"}}  className="card-img-top rounded-top-4" alt="..." onClick={()=>{navigate('/elementdetail/'+{type}+'/'+{id})}}/>
+        <div className="card-body text-white">
+            <h5 className="card-title">{text}</h5>
+            <a href={'/elementdetail/'+ type +'/'+ id }>More +</a>
         </div>
-        
+        <div className="notch-contain"></div>
+    </div>
     </>
     )
 }
-export default Card;
+export default CardScroll;
 
 
-/* Preguntas
-
-El key al pintar un componente lo toma REACT como key y lo tomo en el componente como prop? 
-Logica condicional para resolver destructiracion del html en los componentes. 
-
-Recordar 
-Postman
-Pasar codigo
-*/

@@ -17,14 +17,11 @@
     border-right: 14px solid blue;
     width: 70%;
   }
-  .marco-inferior::after {
-    right: 0;
-    border-left: 14px solid blue;
-    width: 10%;
-  }
-
-  
-  
+.marco-inferior::after {
+  right: 0;
+  border-left: 14px solid blue;
+  width: 10%;
+}
   
 .notch-contain:before, .notch-contain:after {display:block;position:absolute}
 .notch-contain:before, .notch-contain:after {content:"";width:0;z-index:-2;box-sizing:border-box}
@@ -38,10 +35,39 @@
 .notch-contain {display:block;position:relative;top:0;left:0;right:0;bottom:0;background-color:#1D1E1F}
 .notch-contain {bottom:13px}
 
-
- .notch-contain{background-color:yellowgreen}
+.notch-contain{background-color:yellowgreen}
  .card-wrapper .card-body {
   background-color: #1D1E1F;
  }
 
- 
+
+/*MDB*/
+    .card-group.card-group-scroll > .card {
+        flex-basis: 100%;
+    }
+@media (min-width: 576px) {
+    .card-group.card-group-scroll {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+    .card-group.card-group-scroll > .card {
+        flex-basis: 100%;
+    }
+  }
+@media (min-width: 768px) { 
+  .card-group.card-group-scroll > .card {
+      flex-basis: 50%;
+  }
+ }
+
+@media (min-width: 992px) { 
+  .card-group.card-group-scroll > .card {
+      flex-basis: 25%;
+  }
+ }
+ @media (min-width: 1200px) {
+  .card-group.card-group-scroll > .card {
+      flex-basis: 20%;
+  }
+ }
+    

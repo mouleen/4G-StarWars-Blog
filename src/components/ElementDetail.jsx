@@ -1,5 +1,9 @@
+import { useParams } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { getElement } from "../services/api.js";
+import { useEffect, useState } from "react";
 
-const Card = ({title,text,url}) => {
+const ElementDetail = ({title,text,url}) => {
     const randomImage=()=>{
         let image_array=[
             "https://lumiere-a.akamaihd.net/v1/images/bunta-tree-main_598ecc76.jpeg",
@@ -23,32 +27,37 @@ const Card = ({title,text,url}) => {
         let imageIDX = Math.floor(Math.random() * image_array.length);
         return image_array[imageIDX];
     }
+    const {store} =useGlobalReducer();
+    const { elementType,elementId } = useParams();
+    const [ element,setElement ] = useState("");
+    const handleGetElement = async (type,id) =>{
+        const elementDetail = await getElement(type,id);
+        console.log(elementDetail,'Detail')
+        setElement(elementDetail);
+    }
+    useEffect(()=>{
+        handleGetElement(elementType,elementId);
+    },[])
     
 return (
     <>
-        <div className="card border-black mx-2 bg-black rounded-4" style={{width:"18rem"}}>
-            <img src={randomImage()}  style={{ minHeight:"200px", objectFit:"cover"}} alt="" className="card-img-top" />
-            <div className="card-body text-white">
-                <a href={url}> 
-                    <h5 className="card-title">{title}</h5>
-                    <p className="card-text">{text}</p>
-                </a>
+        <div className="card" style={{ height: "640px"}}>
+            <div className="row g-0">
+                <div className="col-md-4">
+                    <img src={randomImage()}  className="img-fluid rounded-start" alt="..." />
+                </div>
+                <div className="col-md-8">
+                    <div className="card-body">
+                        <h5 className="card-title">{element.description}</h5>
+                        <p className="card-text">{element.properties.name}</p>
+                        <p className="card-text"><small className="text-body-secondary">{url}</small></p>
+                    </div>
+                </div>
             </div>
-            <div className="notch-contain"></div>
         </div>
-        
     </>
     )
 }
-export default Card;
+export default ElementDetail;
 
 
-/* Preguntas
-
-El key al pintar un componente lo toma REACT como key y lo tomo en el componente como prop? 
-Logica condicional para resolver destructiracion del html en los componentes. 
-
-Recordar 
-Postman
-Pasar codigo
-*/

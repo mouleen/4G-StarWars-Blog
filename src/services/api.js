@@ -6,7 +6,7 @@ export const getElement = async (type,id) => {
     
     const newElement = await fetch(apiBaseUrl + "/" + type + "/" + id );
     const response = await newElement.json();
-    return response.results;
+    return response.result;
 
 }
 
