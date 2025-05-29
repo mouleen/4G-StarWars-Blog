@@ -1,5 +1,6 @@
 import { Navigate, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { useEffect, useState } from "react";
 
 const CardScroll = ({text,type,id}) => {
     const {store, dispatch} =useGlobalReducer()
@@ -27,14 +28,39 @@ const CardScroll = ({text,type,id}) => {
         let imageIDX = Math.floor(Math.random() * image_array.length);
         return image_array[imageIDX];
     }
-    
+    const [heart,setHeart] = useState("fa-regular fa-heart");
+    const handleSetFavorites=(type,id)=>{
+        let fav=[...store.favorites]
+        let favFiltered=fav.filter(persona => (persona.type == type && persona.id == id))
+        console.log(favFiltered,'FILTERED');
+        if(favFiltered.length > 0){
+            let favFilterRemove=fav.filter(persona => (!(persona.type == type && persona.id == id)))
+            console.log(favFilterRemove,'FILTERREMOVE');
+            dispatch({type: 'get_favorites',payload: favFilterRemove });    
+        }else{
+            let favAdd=[...store.favorites,{name:text,id:id,type:type}]
+            dispatch({type: 'get_favorites',payload: favAdd });
+        }
+    }
+    const handleGetFavoriteStates=(type,id)=>{
+        let fav=[...store.favorites]
+        let favFiltered=fav.filter(persona => (persona.type == type && persona.id == id))
+       // console.log(favFiltered,'< FILTERED | FAV >',fav);
+       setHeart(favFiltered.length > 0 ? "fa-solid fa-heart" : "fa-regular fa-heart" )
+        //let cssclass="fa-solid fa-heart"// fa-regular
+    }
+    useEffect(()=>{
+        if(!store.favorites) return
+        handleGetFavoriteStates(type,id);
+    },[store.favorites])
 return (
     <>
      <div className="card border-black mx-2 bg-black rounded-4" >
         <img src={randomImage()}   style={{ minHeight:"200px", objectFit:"cover"}}  className="card-img-top rounded-top-4" alt="..." onClick={()=>{navigate('/elementdetail/'+{type}+'/'+{id})}}/>
         <div className="card-body text-white">
             <h5 className="card-title">{text}</h5>
-            <a href={'/elementdetail/'+ type +'/'+ id }>More +</a>
+            <a href={'/elementdetail/'+ type +'/'+ id }>More +</a> 
+            <a href="#" onClick={()=>{handleSetFavorites(type,id)}}> <i className={heart} ></i></a>
         </div>
         <div className="notch-contain"></div>
     </div>

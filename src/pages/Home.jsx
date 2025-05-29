@@ -8,17 +8,18 @@ export const Home = () => {
 	const {store, dispatch} =useGlobalReducer()
 	
 	const handleGetElements= async (type,action) => {
-		let elements = await getElementIndex(type);
-		dispatch({type: action,payload: elements });
+		const Element=localStorage.getItem(type);
+		const objElement=JSON.parse(Element);
+		if (objElement) {
+			dispatch({type: action,payload: objElement });
+		}else{
+				let elements = await getElementIndex(type);
+				dispatch({type: action,payload: elements });
+				const strElement = JSON.stringify(elements);
+				localStorage.setItem(type,strElement);
+			}
 	}
-	/*const handleGetElements= async () => {
-		let vehicles = await getElementIndex('vehicles');
-		dispatch({type: "get_vehicles",payload: vehicles })
-		let people =  await getElementIndex('people');
-		dispatch({type: "get_people",payload: people })
-		let planets =  await getElementIndex('planets');
-		dispatch({type: "get_planets",payload: planets })
-	}*/
+
 	useEffect(()=>{
 		handleGetElements("people","get_people");
 		handleGetElements("planets","get_planets");
