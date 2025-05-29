@@ -29,19 +29,25 @@ export const Home = () => {
 	//console.log(store);
 	return (
 		<>
-			<div className="card-group card-group-scroll">
+				<h4 className="ms-5 text-secondary mt-5">Vehicles</h4>
+				<hr className="text-light"/>
+			<div className="card-group card-group-scroll mx-4">
 				{ 
 				store.vehicles.map((element,idx)=>(
 					<CardScroll key={idx} text={element.name} type='vehicles' id={element.uid} />		
 				))}
 			</div>
-			<div className="card-group card-group-scroll">
+			<h4 className="ms-5 text-secondary mt-5">People</h4>
+			<hr className="text-light"/>
+			<div className="card-group card-group-scroll mx-4">
 				{ 
 				store.people.map((element,idx)=>(
 					<CardScroll key={idx} text={element.name} type='people' id={element.uid}  />		
 				))}
 			</div>
-			<div className="card-group card-group-scroll">
+			<h4 className="ms-5 text-secondary mt-5">Planets</h4>
+			<hr className="text-light"/>
+			<div className="card-group card-group-scroll mx-4">
 				{ 
 				store.planets.map((element,idx)=>(
 					<CardScroll key={idx} text={element.name} type='planets' id={element.uid}  />		

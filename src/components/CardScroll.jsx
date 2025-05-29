@@ -30,7 +30,7 @@ const CardScroll = ({text,type,id}) => {
     }
     const [heart,setHeart] = useState("fa-regular fa-heart");
     const handleSetFavorites=(type,id)=>{
-        let fav=[...store.favorites]
+        let fav=[...store.favorites];
         let favFiltered=fav.filter(persona => (persona.type == type && persona.id == id))
         console.log(favFiltered,'FILTERED');
         if(favFiltered.length > 0){
@@ -40,10 +40,18 @@ const CardScroll = ({text,type,id}) => {
         }else{
             let favAdd=[...store.favorites,{name:text,id:id,type:type}]
             dispatch({type: 'get_favorites',payload: favAdd });
+        	//localStorage.setItem(type,favAdd);
         }
     }
     const handleGetFavoriteStates=(type,id)=>{
-        let fav=[...store.favorites]
+        /*const Element=localStorage.getItem(type);
+		const objElement=JSON.parse(Element);
+        let fav=[];
+		if (objElement) {
+            fav=objElement;
+        }else{*/
+          let fav=[...store.favorites]
+        //}
         let favFiltered=fav.filter(persona => (persona.type == type && persona.id == id))
        // console.log(favFiltered,'< FILTERED | FAV >',fav);
        setHeart(favFiltered.length > 0 ? "fa-solid fa-heart" : "fa-regular fa-heart" )
@@ -55,12 +63,12 @@ const CardScroll = ({text,type,id}) => {
     },[store.favorites])
 return (
     <>
-     <div className="card border-black mx-2 bg-black rounded-4" >
-        <img src={randomImage()}   style={{ minHeight:"200px", objectFit:"cover"}}  className="card-img-top rounded-top-4" alt="..." onClick={()=>{navigate('/elementdetail/'+{type}+'/'+{id})}}/>
+     <div className="card border-black mx-2 bg-black rounded-4 card-background-black" >
+        <img src={randomImage()}   style={{ height:"200px", minHeight:"200px", objectFit:"cover"}}  className="card-img-top rounded-top-4" alt="..." onClick={()=>{navigate('/elementdetail/'+{type}+'/'+{id})}}/>
         <div className="card-body text-white">
             <h5 className="card-title">{text}</h5>
-            <a href={'/elementdetail/'+ type +'/'+ id }>More +</a> 
-            <a href="#" onClick={()=>{handleSetFavorites(type,id)}}> <i className={heart} ></i></a>
+            <button className="btn btn-secondary mt-5 ms-3 me-4" style={{display: "inline-block",width:"50%"}} type="button" onClick={()=>{navigate('/elementdetail/'+ type +'/'+ id )}}>Learn more</button>
+            <button className="btn btn-secondary mt-5 ms-4 me-1" style={{display: "inline-block",width:"20%"}} type="button" onClick={()=>{handleSetFavorites(type,id)}}><i className={heart} ></i></button>
         </div>
         <div className="notch-contain"></div>
     </div>
