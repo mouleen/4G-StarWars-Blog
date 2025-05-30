@@ -1,5 +1,6 @@
 .body{
-  background-color: #1D1E1F !important;
+  background-image: url("/src/assets/img/bg-sw-desktop.jpeg") !important;
+ /* background-color: #1D1E1F !important;*/
 }
 .marco-inferior{
     background-color: green;
@@ -45,8 +46,12 @@
 
 
 /*MDB*/
+    .card-group.card-group-scroll {
+      overflow-x: visible;
+      flex-wrap: nowrap;
+    }
     .card-group.card-group-scroll > .card {
-        flex-basis: 100%;
+        flex-basis: 80%;
     }
 @media (min-width: 576px) {
     .card-group.card-group-scroll {
@@ -118,3 +123,12 @@
  .card-background-black {
   background-color:#1D1E1F !important;
  }
+
+
+.scrollbar-custom {
+  overflow: scroll;
+  scrollbar-color: orange black;
+  scrollbar-width: thin;
+  overflow-y: hidden; 
+  scrollbar-width: revert;
+}

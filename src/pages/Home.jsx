@@ -4,6 +4,7 @@ import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { getElement,getElementIndex } from "../services/api.js";
 import CardScroll from "../components/CardScroll.jsx";
 
+
 export const Home = () => {
 	const {store, dispatch} =useGlobalReducer()
 	
@@ -26,12 +27,11 @@ export const Home = () => {
 		handleGetElements("vehicles","get_vehicles");
 	},[]);
 	
-	//console.log(store);
 	return (
 		<>
-				<h4 className="ms-5 text-secondary mt-5">Vehicles</h4>
-				<hr className="text-light"/>
-			<div className="card-group card-group-scroll mx-4">
+			<h4 className="ms-5 text-secondary mt-5">Vehicles</h4>
+			<hr className="text-light"/>						   
+			<div className="card-group card-group-scroll mx-4 scrollbar-custom pb-4" >
 				{ 
 				store.vehicles.map((element,idx)=>(
 					<CardScroll key={idx} text={element.name} type='vehicles' id={element.uid} />		
@@ -39,7 +39,7 @@ export const Home = () => {
 			</div>
 			<h4 className="ms-5 text-secondary mt-5">People</h4>
 			<hr className="text-light"/>
-			<div className="card-group card-group-scroll mx-4">
+			<div className="card-group card-group-scroll mx-4 scrollbar-custom  pb-4">
 				{ 
 				store.people.map((element,idx)=>(
 					<CardScroll key={idx} text={element.name} type='people' id={element.uid}  />		
@@ -47,7 +47,7 @@ export const Home = () => {
 			</div>
 			<h4 className="ms-5 text-secondary mt-5">Planets</h4>
 			<hr className="text-light"/>
-			<div className="card-group card-group-scroll mx-4">
+			<div className="card-group card-group-scroll mx-4 scrollbar-custom  pb-4">
 				{ 
 				store.planets.map((element,idx)=>(
 					<CardScroll key={idx} text={element.name} type='planets' id={element.uid}  />		

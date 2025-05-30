@@ -1,27 +1,32 @@
 import { Link, useNavigate } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import SWImageUrl from "../assets/img/Star_Wars_Logo_W.png";
 
 export const Navbar = () => {
-	const {store,dispatch} =useGlobalReducer()
-	const navigate=useNavigate();
+	const {store,dispatch} = useGlobalReducer();
+	const navigate = useNavigate();
 
-	const handleDeleteFavorites=(type,id)=>{
-		let fav=[...store.favorites]
-		let favFiltered=fav.filter(persona => (persona.type == type && persona.id == id))
+	const handleDeleteFavorites = (type,id)=>{
+		let objFavorites=[...store.favorites];
+		let favFiltered=objFavorites.filter(persona => (persona.type == type && persona.id == id));
+
 		if(favFiltered.length > 0){
-			let favFilterRemove=fav.filter(persona => (!(persona.type == type && persona.id == id)))
-			dispatch({type: 'get_favorites',payload: favFilterRemove });    
+			let favFilteredRemove=objFavorites.filter(persona => (!(persona.type == type && persona.id == id)));
+			dispatch({type: 'get_favorites',payload: favFilteredRemove });    
+			const lsFavorites = JSON.stringify(favFilteredRemove);
+			localStorage.setItem('favorites',lsFavorites);
 		}else{
-			alert('no existe el elemento que intenta eliminar')
+			alert('no existe el elemento que intenta eliminar');
 		}
 	}
-	//https://lumiere-a.akamaihd.net/v1/images/corellia-main_621fbca8.jpeg
+
+
 	return (
 		<nav className="navbar navbar-dark p-4 pb-5">
 			<div className="container">
 				<Link to="/">
 					<span className="navbar-brand mb-0 h1">
-						<img className="float-start img-fluid" style={{height:"40px"}}src="https://lumiere-a.akamaihd.net/v1/images/sw_logo_stacked_2x-52b4f6d33087_7ef430af.png" alt="Logo Starwars" />
+						<img className="float-start img-fluid" style={{height:"40px"}}src={SWImageUrl} alt="Logo Starwars" />
 					</span>
 				</Link>
 				<div className="ml-auto rounded float-end">
@@ -30,7 +35,6 @@ export const Navbar = () => {
 								Favorites {store.favorites.length}
 						</button>
 						<ul className="dropdown-menu">
-							
 							{
 								store.favorites.map((item,idx)=>(
 								<li key={idx} style={{width:'300px'}}>
@@ -38,8 +42,7 @@ export const Navbar = () => {
 									<i class="fa-regular fa-trash-can" style={{display: "inline-block",width:"10%"}} onClick={()=>{handleDeleteFavorites(item.type,item.id)}}></i>
 								</li>
 								))
-						}
-						
+							}
 						</ul>
 					</div>
 				</div>
