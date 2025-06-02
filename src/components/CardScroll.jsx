@@ -47,7 +47,7 @@ const CardScroll = ({text,type,id}) => {
 return (
     <>
      <div className="card border-black mx-2 bg-black rounded-4 card-background-black" >
-        <img src={RandomImage(type)}   style={{ height:"200px", minHeight:"200px", objectFit:"cover"}}  className="card-img-top rounded-top-4" alt="..." onClick={()=>{navigate('/elementdetail/'+{type}+'/'+{id})}}/>
+        <img src={RandomImage(type)}   style={{ height:"200px", minHeight:"200px", objectFit:"cover"}}  className="card-img-top rounded-top-4" alt="..." onClick={()=>{navigate('/elementdetail/'+type+'/'+id)}}/>
         <div className="card-body text-white">
             <h5 className="card-title">{text}</h5>
             <button className="btn btn-secondary mt-5 ms-3 me-4" style={{display: "inline-block",width:"50%"}} type="button" onClick={()=>{navigate('/elementdetail/'+ type +'/'+ id )}}>Learn more</button>

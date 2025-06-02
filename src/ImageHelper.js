@@ -1,7 +1,7 @@
 export const RandomImage=(elementType)=>{
     let image_array=[];
     if (typeof elementType !== "string") return
-    console.log(elementType,'<< elementType')
+    //console.log(elementType,'<< elementType')
     image_array['people']=[
         "https://lumiere-a.akamaihd.net/v1/images/mother-aniseya-main_7ffc85e5.jpeg",
         "https://lumiere-a.akamaihd.net/v1/images/jecki-lon-main_3b0268ec.jpeg",
